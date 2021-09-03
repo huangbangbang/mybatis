@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bj.dao.StudentDao">
+    <select id="selectStudentById" parameterType="int" resultType="com.bj.domain.Student">
+       select id,name ,email,age from  t_student where id=#{id};
+    </select>
+
+    <select id="selectMultiParam" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where name=#{myname} or age=#{myage};
+    </select>
+    <!--name=#{paramName,javaType=java.lang.String,jdbcType=VACHAR}
+    or
+    age=#{paramAge,javaType=java.lang.Integer,jdbcType=INTEGER};-->
+    <select id="selectMultiObject" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where
+
+        name=#{paramName} or age=#{paramAge}
+    </select>
+    <select id="selectMultiStudent" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where name=#{name} or age=#{age}
+    </select>
+
+    <select id="selectMultiPosition" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where name=#{arg0} or age=#{arg1}
+    </select>
+
+    <select id="selectMultiByMap" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where name=#{name} or age=#{age}
+    </select>
+    <select id="selectUser$" resultType="com.bj.domain.Student">
+        select id,name ,email,age from  t_student where name=${myname}
+    </select>
+
+    <select id="selectUser$Order" resultType="com.bj.domain.Student">
+        select * from  t_student order by ${a}
+    </select>
+</mapper>

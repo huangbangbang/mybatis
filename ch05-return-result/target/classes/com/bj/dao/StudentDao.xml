@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bj.dao.StudentDao">
+    <select id="selectStudentById" parameterType="int" resultType="com.bj.domain.Student">
+       select id,name ,email,age from  t_student where id=#{id};
+    </select>
+
+    <select id="selectMultiParam" resultType="Student">
+        select id,name ,email,age from  t_student where name=#{myname} or age=#{myage};
+    </select>
+
+    <select id="selectViewStudentById" resultType="ViewStudent">
+        select id,name ,email,age from  t_student where id=#{id}
+    </select>
+
+    <select id="countStudent" resultType="int">
+        select count(*) from  t_student
+    </select>
+
+    <select id="selectMapById" resultType="java.util.HashMap">
+        select id,name,email from  t_student where id=#{stuid}
+    </select>
+
+    <resultMap id="studentMap" type="com.bj.domain.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+    </resultMap>
+    <select id="selectAllStudent" resultMap="studentMap">
+        select id,name ,email,age from  t_student
+    </select>
+    <resultMap id="mystudentMap" type="com.bj.domain.MyStudent">
+        <id column="id" property="stuid"/>
+        <result column="name" property="stuname"/>
+        <result column="email" property="stuemail"/>
+        <result column="age" property="stuage"/>
+    </resultMap>
+    <select id="selectMyStudent" resultMap="mystudentMap">
+        select id,name ,email,age from  t_student
+    </select>
+
+    <select id="selectDiffColProperty" resultType="com.bj.domain.MyStudent">
+        select id as stuid,name as stuname ,email as stuemail,age as stuage from  t_student
+    </select>
+    <select id="selectLikeName" resultType="com.bj.domain.Student">
+        select id ,name ,email,age from  t_student where name like #{name}
+    </select>
+
+    <select id="selectLikeNameTwo" resultType="com.bj.domain.Student">
+        select id ,name ,email,age from  t_student where name like "%" #{name}"%"
+    </select>
+</mapper>
